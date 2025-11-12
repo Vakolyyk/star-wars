@@ -1,9 +1,12 @@
+'use server';
+
 import { api } from "../lib/api";
 import { Species } from "../types";
+import { Paginated } from "./paginated";
 
-export const getSpecies = async (): Promise<Species[]> => {
+export const getSpecies = async (page = 1): Promise<Paginated<Species>> => {
   try {
-    const { data } = await api.get<Species[]>('/species/');
+    const { data } = await api.get<Paginated<Species>>(`/species/?page=${page}`);
     return data;
   } catch (error) {
     throw new Error(`Cannot fetch species: ${(error as Error).message}`);

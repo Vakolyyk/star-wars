@@ -1,9 +1,12 @@
+'use server';
+
 import { api } from "../lib/api";
 import { Planet } from "../types";
+import { Paginated } from "./paginated";
 
-export const getPlanets = async (): Promise<Planet[]> => {
+export const getPlanets = async (page = 1): Promise<Paginated<Planet>> => {
   try {
-    const { data } = await api.get<Planet[]>('/planets/');
+    const { data } = await api.get<Paginated<Planet>>(`/planets/?page=${page}`);
     return data;
   } catch (error) {
     throw new Error(`Cannot fetch planets: ${(error as Error).message}`);
