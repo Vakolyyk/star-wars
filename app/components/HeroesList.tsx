@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Hero } from "../types";
 import { getHeroes } from "../actions/hero";
+import { HeroModal } from "./HeroModal";
 
 export const HeroesList = () => {
     const [heroes, setHeroes] = useState<Hero[]>([]);
@@ -10,6 +11,9 @@ export const HeroesList = () => {
     const [loading, setLoading] = useState(false);
     const [totalPages, setTotalPages] = useState(1);
     
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedHero, setSelectedHero] = useState<Hero | null>(null);
+
     const fetchHeroes = async (page: number) => {
         setLoading(true);
         try {
@@ -30,6 +34,11 @@ export const HeroesList = () => {
     const handlePageChange = (pageNum: number) => {
         if (pageNum < 1 || pageNum > totalPages) return;
         setPage(pageNum);
+    };
+
+     const handleHeroClick = async (hero: Hero) => {
+        setSelectedHero(hero);
+        setModalOpen(true);
     };
     
     return (
@@ -70,12 +79,17 @@ export const HeroesList = () => {
                         </button>
                     </div>
                     {heroes.map(hero => (
-                        <div key={hero.name} className="w-full max-w-4xl mx-auto bg-zinc-900 rounded-2xl shadow-sm p-8">
+                        <div key={hero.name} onClick={() => handleHeroClick(hero)} className="cursor-pointer w-full max-w-4xl mx-auto bg-zinc-900 rounded-2xl shadow-sm p-8">
                             <h2 className="text-xl font-semibold">{hero.name}</h2>
                         </div>
                     ))}
                 </>
             )}
+            <HeroModal
+                isOpen={modalOpen}
+                onClose={() => setModalOpen(false)}
+                hero={selectedHero}
+            />
         </div>
     )
 };
