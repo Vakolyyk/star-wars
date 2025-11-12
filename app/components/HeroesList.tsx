@@ -36,10 +36,15 @@ export const HeroesList = () => {
         setPage(pageNum);
     };
 
-     const handleHeroClick = async (hero: Hero) => {
+     const handleHeroClick = (hero: Hero) => {
         setSelectedHero(hero);
         setModalOpen(true);
     };
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
+        setSelectedHero(null);
+    }
     
     return (
         <div className="flex flex-col gap-3" >
@@ -87,7 +92,7 @@ export const HeroesList = () => {
             )}
             <HeroModal
                 isOpen={modalOpen}
-                onClose={() => setModalOpen(false)}
+                onClose={handleCloseModal}
                 hero={selectedHero}
             />
         </div>
