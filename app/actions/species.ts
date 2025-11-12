@@ -2,7 +2,7 @@
 
 import { api } from "../lib/api";
 import { Species } from "../types";
-import { Paginated } from "./paginated";
+import { Paginated } from "../types/paginated";
 
 export const getSpecies = async (page = 1): Promise<Paginated<Species>> => {
   try {

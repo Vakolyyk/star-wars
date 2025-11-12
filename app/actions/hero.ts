@@ -3,7 +3,7 @@
 import axios from "axios";
 import { api } from "../lib/api";
 import { Film, Hero, Starship } from "../types";
-import { Paginated } from "./paginated";
+import { Paginated } from "../types/paginated";
 
 export const getHeroes = async (page = 1): Promise<Paginated<Hero>> => {
   try {

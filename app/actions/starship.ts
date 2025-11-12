@@ -2,7 +2,7 @@
 
 import { api } from "../lib/api";
 import { Starship } from "../types";
-import { Paginated } from "./paginated";
+import { Paginated } from "../types/paginated";
 
 export const getStarships = async (page = 1): Promise<Paginated<Starship>> => {
   try {
