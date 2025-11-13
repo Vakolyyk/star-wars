@@ -26,7 +26,7 @@ describe('Species Service (app/actions/species.ts)', () => {
         previous: null,
         results: [{ name: 'Human' } as Species],
       };
-      
+
       mockedApiGet.mockResolvedValue({ data: mockResponse });
 
       const result = await getSpecies(1);
@@ -64,7 +64,7 @@ describe('Species Service (app/actions/species.ts)', () => {
       mockedApiGet.mockRejectedValue(new Error(errorMessage));
 
       await expect(getSpeciesById(speciesId)).rejects.toThrow(
-        `Cannot fetch species ${speciesId}: ${errorMessage}`
+        `Cannot fetch species ${speciesId}: ${errorMessage}`,
       );
     });
   });

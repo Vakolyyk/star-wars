@@ -1,4 +1,4 @@
-import { HeroesList } from "./components/HeroesList";
+import { HeroesList } from './components/HeroesList';
 
 export default async function Home() {
   return (

@@ -26,7 +26,7 @@ describe('Vehicle Service (app/actions/vehicle.ts)', () => {
         previous: null,
         results: [{ name: 'Sand Crawler' } as Vehicle],
       };
-      
+
       mockedApiGet.mockResolvedValue({ data: mockResponse });
 
       const result = await getVehicles(1);
@@ -64,7 +64,7 @@ describe('Vehicle Service (app/actions/vehicle.ts)', () => {
       mockedApiGet.mockRejectedValue(new Error(errorMessage));
 
       await expect(getVehicleById(vehicleId)).rejects.toThrow(
-        `Cannot fetch vehicle ${vehicleId}: ${errorMessage}`
+        `Cannot fetch vehicle ${vehicleId}: ${errorMessage}`,
       );
     });
   });

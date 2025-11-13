@@ -49,19 +49,17 @@ describe('HeroModal Component', () => {
   it('should render null when isOpen is false', () => {
     // Arrange: Render with isOpen={false}
     const { container } = render(
-      <HeroModal isOpen={false} onClose={mockOnClose} hero={mockHero} />
+      <HeroModal isOpen={false} onClose={mockOnClose} hero={mockHero} />,
     );
-    
+
     // Assert: The component should render nothing
     expect(container.firstChild).toBeNull();
   });
 
   it('should render null when hero is null', () => {
     // Arrange: Render with hero={null}
-    const { container } = render(
-      <HeroModal isOpen={true} onClose={mockOnClose} hero={null} />
-    );
-    
+    const { container } = render(<HeroModal isOpen={true} onClose={mockOnClose} hero={null} />);
+
     // Assert: The component should render nothing
     expect(container.firstChild).toBeNull();
   });
@@ -75,7 +73,7 @@ describe('HeroModal Component', () => {
 
     // Assert: Check loading state
     expect(screen.getByText('Loading details...')).toBeInTheDocument();
-    
+
     // Assert: Check that the action was called with the correct hero
     expect(mockedGetHeroDetails).toHaveBeenCalledWith(mockHero);
     expect(mockedGetHeroDetails).toHaveBeenCalledTimes(1);
@@ -87,7 +85,7 @@ describe('HeroModal Component', () => {
 
     // Assert: Check success state (the mock graph is rendered)
     expect(screen.getByTestId('mock-hero-graph')).toBeInTheDocument();
-    
+
     // Check that the graph received the correct props
     expect(screen.getByTestId('graph-hero-name')).toHaveTextContent('Luke Skywalker');
     expect(screen.getByTestId('graph-film-count')).toHaveTextContent('2'); // From our mockDetailsResponse
@@ -124,10 +122,7 @@ describe('HeroModal Component', () => {
     });
 
     // Assert: Error state
-    expect(console.error).toHaveBeenCalledWith(
-      "Failed to fetch hero details", 
-      expect.any(Error)
-    );
+    expect(console.error).toHaveBeenCalledWith('Failed to fetch hero details', expect.any(Error));
     // The graph should not be rendered
     expect(screen.queryByTestId('mock-hero-graph')).not.toBeInTheDocument();
   });

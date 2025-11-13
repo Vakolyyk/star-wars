@@ -26,7 +26,7 @@ describe('Film Service (app/actions/film.ts)', () => {
         previous: null,
         results: [{ id: 1, title: 'A New Hope' } as unknown as Film],
       };
-      
+
       mockedApiGet.mockResolvedValue({ data: mockResponse });
 
       const result = await getFilms(1);
@@ -64,7 +64,7 @@ describe('Film Service (app/actions/film.ts)', () => {
       mockedApiGet.mockRejectedValue(new Error(errorMessage));
 
       await expect(getFilmById(filmId)).rejects.toThrow(
-        `Cannot fetch film ${filmId}: ${errorMessage}`
+        `Cannot fetch film ${filmId}: ${errorMessage}`,
       );
     });
   });

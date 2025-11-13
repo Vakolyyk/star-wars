@@ -36,7 +36,7 @@ export const HeroGraph = ({ hero, filmsWithStarships }: HeroGraphProps) => {
         data: { label: s.name },
         position: { x: (i + 1) * 200 + j * 100, y: 250 + j * 70 },
         style: { padding: 10, background: '#4b5563', color: '#fff', borderRadius: 10 },
-      }))
+      })),
     );
 
     return [heroNode, ...filmNodes, ...starshipNodes];
@@ -61,7 +61,7 @@ export const HeroGraph = ({ hero, filmsWithStarships }: HeroGraphProps) => {
         target: `starship-${film.episode_id}-${s.name}`,
         animated: true,
         style: { stroke: '#9ca3af' },
-      }))
+      })),
     );
 
     return [...filmEdges, ...starshipEdges];

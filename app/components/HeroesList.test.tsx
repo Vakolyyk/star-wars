@@ -11,7 +11,7 @@ jest.mock('../actions/hero', () => ({
 // Mock HeroModal so we don't test its logic here
 // Just check if it opens/closes
 jest.mock('./HeroModal', () => ({
-  HeroModal: ({ isOpen, hero }: { isOpen: boolean, hero: Hero | null }) =>
+  HeroModal: ({ isOpen, hero }: { isOpen: boolean; hero: Hero | null }) =>
     isOpen ? (
       <div data-testid="hero-modal">
         {/* Show hero name to check if the correct hero is passed */}
@@ -24,7 +24,6 @@ jest.mock('./HeroModal', () => ({
 const mockedGetHeroes = getHeroes as jest.Mock;
 
 describe('HeroesList Component', () => {
-
   // Prepare mock data
   const mockPage1: Paginated<Hero> = {
     count: 20,

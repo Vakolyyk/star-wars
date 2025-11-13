@@ -1,8 +1,8 @@
 'use server';
 
-import { api } from "../lib/api";
-import { Species } from "../types";
-import { Paginated } from "../types/paginated";
+import { api } from '../lib/api';
+import { Species } from '../types';
+import { Paginated } from '../types/paginated';
 
 /**
  * Fetches a paginated list of species from the API.

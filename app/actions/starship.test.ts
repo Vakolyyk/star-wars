@@ -26,7 +26,7 @@ describe('Starship Service (app/actions/starship.ts)', () => {
         previous: null,
         results: [{ name: 'X-Wing' } as Starship],
       };
-      
+
       mockedApiGet.mockResolvedValue({ data: mockResponse });
 
       const result = await getStarships(1);
@@ -62,9 +62,9 @@ describe('Starship Service (app/actions/starship.ts)', () => {
       const starshipId = 99;
       const errorMessage = 'Not Found';
       mockedApiGet.mockRejectedValue(new Error(errorMessage));
-      
+
       await expect(getStarshipById(starshipId)).rejects.toThrow(
-        `Cannot fetch starship ${starshipId}: ${errorMessage}`
+        `Cannot fetch starship ${starshipId}: ${errorMessage}`,
       );
     });
   });

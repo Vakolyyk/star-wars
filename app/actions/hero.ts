@@ -1,9 +1,9 @@
 'use server';
 
-import axios from "axios";
-import { api } from "../lib/api";
-import { Film, Hero, Starship } from "../types";
-import { Paginated } from "../types/paginated";
+import axios from 'axios';
+import { api } from '../lib/api';
+import { Film, Hero, Starship } from '../types';
+import { Paginated } from '../types/paginated';
 
 /**
  * Fetches a paginated list of heroes from the API.
@@ -81,28 +81,26 @@ export const getHeroDetails = async (hero: Hero): Promise<HeroDetails> => {
   try {
     // Fetch full data for all films where the hero appears
     const filmsData: Film[] = await Promise.all(
-      hero.films.map((url) => axios.get<Film>(url).then(res => res.data))
+      hero.films.map((url) => axios.get<Film>(url).then((res) => res.data)),
     );
 
     // For each film, find starships that belong to the hero
     const filmsWithStarships: FilmWithStarships[] = await Promise.all(
       filmsData.map(async (film) => {
-        const heroStarshipsInFilm = film.starships.filter(url =>
-          hero.starships.includes(url)
-        );
+        const heroStarshipsInFilm = film.starships.filter((url) => hero.starships.includes(url));
 
         // Fetch full data for each of the hero’s starships in this film
         const starships: Starship[] = await Promise.all(
-          heroStarshipsInFilm.map(url => axios.get<Starship>(url).then(res => res.data))
+          heroStarshipsInFilm.map((url) => axios.get<Starship>(url).then((res) => res.data)),
         );
 
         return { film, starships };
-      })
+      }),
     );
 
     return { hero, films: filmsWithStarships };
   } catch (err) {
-    console.error("Failed to fetch hero details", err);
+    console.error('Failed to fetch hero details', err);
     return { hero, films: [] };
   }
 };

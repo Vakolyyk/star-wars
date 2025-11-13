@@ -1,6 +1,6 @@
-import { api } from '../lib/api'; 
+import { api } from '../lib/api';
 import { getPlanets, getPlanetById } from './planet';
-import { Planet } from '../types'; 
+import { Planet } from '../types';
 import { Paginated } from '../types/paginated';
 
 jest.mock('../lib/api', () => ({
@@ -26,7 +26,7 @@ describe('Planet Service (app/actions/planet.ts)', () => {
         previous: null,
         results: [{ name: 'Tatooine' } as Planet],
       };
-      
+
       mockedApiGet.mockResolvedValue({ data: mockResponse });
 
       const result = await getPlanets(1);
@@ -64,7 +64,7 @@ describe('Planet Service (app/actions/planet.ts)', () => {
       mockedApiGet.mockRejectedValue(new Error(errorMessage));
 
       await expect(getPlanetById(planetId)).rejects.toThrow(
-        `Cannot fetch planet ${planetId}: ${errorMessage}`
+        `Cannot fetch planet ${planetId}: ${errorMessage}`,
       );
     });
   });

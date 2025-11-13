@@ -1,10 +1,6 @@
 import axios from 'axios';
 import { api } from '../lib/api';
-import {
-  getHeroes,
-  getHeroById,
-  getHeroDetails,
-} from '../actions/hero';
+import { getHeroes, getHeroById, getHeroDetails } from '../actions/hero';
 import { Film, Hero, Starship } from '../types';
 import { Paginated } from '../types/paginated';
 
@@ -50,9 +46,7 @@ describe('Hero Service (app/actions/hero.ts)', () => {
       const errorMessage = 'Network Error';
       mockedApiGet.mockRejectedValue(new Error(errorMessage));
 
-      await expect(getHeroes(1)).rejects.toThrow(
-        `Cannot fetch heroes: ${errorMessage}`,
-      );
+      await expect(getHeroes(1)).rejects.toThrow(`Cannot fetch heroes: ${errorMessage}`);
     });
   });
 
@@ -96,7 +90,7 @@ describe('Hero Service (app/actions/hero.ts)', () => {
         name: 'X-Wing',
         url: 'https://swapi.dev/api/starships/12/',
       } as Starship;
-      
+
       const otherStarshipUrl = 'https://swapi.dev/api/starships/13/';
 
       const mockFilm: Film = {
@@ -134,7 +128,7 @@ describe('Hero Service (app/actions/hero.ts)', () => {
         films: ['https://swapi.dev/api/films/1/'],
         starships: [],
       } as unknown as Hero;
-      
+
       const errorMessage = 'Axios failed';
       mockedAxiosGet.mockRejectedValue(new Error(errorMessage));
 

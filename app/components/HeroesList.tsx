@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from "react";
-import { Hero } from "../types";
-import { getHeroes } from "../actions/hero";
-import { HeroModal } from "./HeroModal";
+import { useEffect, useState } from 'react';
+import { Hero } from '../types';
+import { getHeroes } from '../actions/hero';
+import { HeroModal } from './HeroModal';
 
 export const HeroesList = () => {
   const [heroes, setHeroes] = useState<Hero[]>([]);
@@ -101,7 +101,7 @@ export const HeroesList = () => {
           </div>
 
           {/* Render hero cards */}
-          {heroes.map(hero => (
+          {heroes.map((hero) => (
             <div
               key={hero.name}
               onClick={() => handleHeroClick(hero)}
@@ -114,11 +114,7 @@ export const HeroesList = () => {
       )}
 
       {/* Modal for hero details */}
-      <HeroModal
-        isOpen={modalOpen}
-        onClose={handleCloseModal}
-        hero={selectedHero}
-      />
+      <HeroModal isOpen={modalOpen} onClose={handleCloseModal} hero={selectedHero} />
     </div>
   );
 };
