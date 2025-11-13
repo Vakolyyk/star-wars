@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import ReactFlow, { Node, Edge, Background, Controls, MiniMap } from 'reactflow';
+import ReactFlow, { Node, Edge, Background } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { Hero, Starship, Film } from '../types';
 
@@ -11,6 +11,10 @@ type HeroGraphProps = {
 };
 
 export const HeroGraph = ({ hero, filmsWithStarships }: HeroGraphProps) => {
+  /**
+   * Build nodes for hero, films, and starships.
+   * Memoized to avoid unnecessary recalculations.
+   */
   const nodes: Node[] = useMemo(() => {
     const heroNode: Node = {
       id: `hero-${hero.name}`,
@@ -38,6 +42,9 @@ export const HeroGraph = ({ hero, filmsWithStarships }: HeroGraphProps) => {
     return [heroNode, ...filmNodes, ...starshipNodes];
   }, [hero, filmsWithStarships]);
 
+  /**
+   * Build edges between hero → films and films → starships.
+   */
   const edges: Edge[] = useMemo(() => {
     const filmEdges: Edge[] = filmsWithStarships.map(({ film }) => ({
       id: `hero-film-${film.episode_id}`,
@@ -62,6 +69,7 @@ export const HeroGraph = ({ hero, filmsWithStarships }: HeroGraphProps) => {
 
   return (
     <div className="w-full h-[70vh]">
+      {/* Interactive graph showing hero connections */}
       <ReactFlow nodes={nodes} edges={edges} fitView>
         <Background />
       </ReactFlow>
